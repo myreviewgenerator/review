@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. S. Roy’s SMILE Dental Clinic - Review Generator</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background: #f4f7f6; color: #333; }
+        .card { max-width: 520px; margin: auto; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); text-align: left; }
+        h2 { text-align: center; color: #1a73e8; margin-bottom: 2px; font-size: 20px; }
+        .subheading { text-align: center; color: #555; font-size: 13px; margin-bottom: 10px; }
+        .stars { font-size: 30px; color: #ffbc00; text-align: center; margin-bottom: 10px; }
+        
+        .lang-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .lang-btn { background: #e0e0e0; border: none; padding: 6px 14px; font-size: 13px; border-radius: 15px; cursor: pointer; font-weight: bold; }
+        .lang-btn.active { background: #1a73e8; color: white; }
+
+        p.subtitle { text-align: center; font-size: 14px; color: #666; margin-bottom: 15px; }
+        .section-title { font-size: 12px; font-weight: bold; color: #444; margin: 12px 0 6px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .tags-container { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { background: #f8f9fa; border: 1px solid #dcdcdc; padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; user-select: none; }
+        .tag.selected { background: #1a73e8; color: white; border-color: #1a73e8; }
+
+        textarea { width: 100%; height: 130px; margin-top: 15px; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; box-sizing: border-box; resize: none; background: #fafafa; }
+        
+        .btn-generate { background: #f1f3f4; color: #333; border: 1px solid #dadce0; padding: 10px; font-size: 14px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 12px; font-weight: 600; }
+        .btn-generate:hover { background: #e8eaed; }
+        
+        .btn-submit { background: #34a853; color: white; border: none; padding: 14px; font-size: 16px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 15px; font-weight: bold; box-shadow: 0 2px 5px rgba(52,168,83,0.3); }
+        .btn-submit:hover { background: #2e8b57; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Dr. S. Roy’s SMILE Dental Clinic</h2>
+    <div class="subheading">Pahari Para Rd, Nutan Para, Jalpaiguri</div>
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+
+    <!-- Language Switcher -->
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="setLanguage('en')">English</button>
+        <button class="lang-btn" onclick="setLanguage('hi')">हिंदी</button>
+        <button class="lang-btn" onclick="setLanguage('bn')">বাংলা</button>
+    </div>
+
+    <p class="subtitle" id="ui-subtitle">Select what you visited for:</p>
+    
+    <div class="section-title">Select Treatment Category</div>
+    <div class="tags-container" id="treatment-tags">
+        <!-- Dynamically populated based on language -->
+    </div>
+
+    <button class="btn-generate" onclick="autoSelectBestReview()">✨ Auto-Select Another Review Option</button>
+    
+    <textarea id="reviewBox" placeholder="Your review text will appear here..."></textarea>
+    
+    <button class="btn-submit" onclick="copyAndRedirect()">📋 Copy & Post to Google</button>
+</div>
+
+<script>
+    const reviewDatabase = {
+        en: {
+            subtitle: "Select what you visited for:",
+            treatments: [
+                { id: "smile", name: "Smile Designing", templates: [
+                    "I was mainly unhappy with the shape of my front teeth and wanted a more balanced smile. The doctor explained the smile design options clearly and showed me what could realistically be done. Really happy with how natural it looks[cite: 1].",
+                    "Got smile designing done here before my wedding. I didn't want anything too artificial, and the final result is actually quite subtle. My smile looks better without looking overdone[cite: 1].",
+                    "I had been thinking about smile designing for a long time but was worried it would look unnatural. The doctor took my concerns seriously and the result came out much better than I expected[cite: 1].",
+                    "I had been conscious about the shape of my front teeth for quite some time. The doctor understood what I wanted and the smile designing result looks natural[cite: 1]."
+                ]},
+                { id: "rootcanal", name: "Root Canal", templates: [
+                    "I had been dreading a root canal for weeks. Dr. Roy explained each step beforehand and the actual treatment was much easier than I had imagined[cite: 1].",
+                    "The tooth pain had become difficult to ignore, so I finally came in for treatment. The doctor explained what was causing it and the pain improved after the procedure[cite: 1].",
+                    "I was quite nervous about root canal treatment, but the dentist kept checking whether I was comfortable. The experience was much smoother than expected[cite: 1]."
+                ]},
+                { id: "secondopinion", name: "Second Opinion", templates: [
+                    "I came in for a second opinion after another clinic recommended expensive work. Here, the dentist suggested a much simpler treatment that solved the problem. Really appreciated the honesty[cite: 1].",
+                    "Another dentist had suggested several procedures, so I wanted another opinion. Dr. Roy checked everything again and explained what was actually necessary. That made the decision much easier[cite: 1]."
+                ]},
+                { id: "scaling", name: "Scaling & Cleaning", templates: [
+                    "I hadn't had a professional cleaning in a long time. The dentist explained what was causing the buildup and also gave me some practical brushing advice[cite: 1].",
+                    "Got scaling done and my teeth feel much cleaner now. The process was comfortable and didn't take as long as I expected[cite: 1]."
+                ]},
+                { id: "extraction", name: "Tooth Extraction / Wisdom", templates: [
+                    "I was very nervous about getting a tooth removed. The doctor explained the procedure and aftercare beforehand, which helped a lot[cite: 1].",
+                    "Had a wisdom tooth removed after dealing with repeated pain. The dentist explained the X-ray and why extraction was recommended[cite: 1]."
+                ]}
+            ]
+        },
+        hi: {
+            subtitle: "अपने इलाज का चयन करें:",
+            treatments: [
+                { id: "smile", name: "Smile Designing", templates: [
+                    "काफी समय से अपने आगे के दांतों की शेप को लेकर थोड़ा कॉन्शियस था। Smile designing के दौरान डॉक्टर ने पहले पूरा प्लान समझाया और रिजल्ट काफी नेचुरल आया[cite: 1]。",
+                    "शादी से पहले smile designing करवाने का सोचा था। डर था कि दांत बहुत आर्टिफिशियल लगेंगे, लेकिन फाइनल रिजल्ट काफी नेचुरल है[cite: 1]。"
+                ]},
+                { id: "rootcanal", name: "Root Canal", templates: [
+                    "Root canal को लेकर काफी डर था। Doctor ने पहले पूरा procedure समझाया और treatment मेरी उम्मीद से काफी आसान रहा[cite: 1]。",
+                    "कई दिनों से tooth pain था। आखिरकार check कराया और root canal की जरूरत बताई गई। पूरी process अच्छे से explain की गई[cite: 1]。"
+                ]},
+                { id: "secondopinion", name: "Second Opinion", templates: [
+                    "दूसरे clinic में काफी expensive treatment बताया गया था। इसलिए second opinion के लिए Dr. Roy के पास आया। यहां problem को दोबारा properly check करके simpler treatment suggest किया गया[cite: 1]。",
+                    "पूरी diagnosis को बिना जल्दी किए review किया गया। यही चीज मुझे सबसे अच्छी लगी[cite: 1]。"
+                ]},
+                { id: "scaling", name: "Scaling / Cleaning", templates: [
+                    "काफी समय बाद scaling करवाई। Cleaning के बाद teeth काफी fresh feel हो रहे हैं[cite: 1]。",
+                    "Gums से थोड़ा bleeding होता था इसलिए check-up कराया। Doctor ने कारण समझाया और आगे क्या करना है बताया[cite: 1]。"
+                ]}
+            ]
+        },
+        bn: {
+            subtitle: "আপনার চিকিৎসার ধরণ নির্বাচন করুন:",
+            treatments: [
+                { id: "smile", name: "Smile Designing", templates: [
+                    "সামনের দাঁতগুলোর শেপ নিয়ে অনেকদিন ধরেই একটু অস্বস্তি ছিল। Smile designing-এর আগে Dr. Roy পুরো বিষয়টা খুব সুন্দরভাবে বুঝিয়ে দিয়েছিলেন। ফলাফলটা ভীষণ ন্যাচারাল হয়েছে[cite: 1]。",
+                    "বিয়ের আগে smile designing করানোর কথা ভাবছিলাম। ভয় ছিল দাঁতগুলো খুব কৃত্রিম দেখাবে, কিন্তু শেষ পর্যন্ত দেখতে বেশ স্বাভাবিকই লাগছে[cite: 1]。"
+                ]},
+                { id: "rootcanal", name: "Root Canal", templates: [
+                    "Root canal নিয়ে আগে থেকেই বেশ ভয় ছিল। Dr. Roy treatment-এর প্রতিটা step আগে বুঝিয়ে দিয়েছিলেন, তাই anxiety অনেকটাই কমে গিয়েছিল[cite: 1]。",
+                    "কয়েকদিন ধরে দাঁতে ব্যথা হচ্ছিল। শেষ পর্যন্ত দেখাতে এসে root canal-এর প্রয়োজনীয়তা বুঝতে পারলাম[cite: 1]。"
+                ]},
+                { id: "secondopinion", name: "Second Opinion", templates: [
+                    "অন্য একটি clinic-এ দেখানোর পর বেশ কিছু expensive treatment করার কথা বলা হয়েছিল। তাই নিশ্চিত হওয়ার জন্য Dr. Roy-এর কাছে second opinion নিতে এসেছিলাম। এখানে পুরো সমস্যাটা আবার পরীক্ষা করে অনেক সহজ একটা treatment suggest করলেন, যেটাতেই সমস্যাটা ঠিক হয়ে গেছে[cite: 1]。"
+                ]},
+                { id: "scaling", name: "Scaling / Cleaning", templates: [
+                    "অনেকদিন scaling করানো হয়নি। Cleaning-এর পর দাঁত অনেক cleaner আর fresh লাগছে[cite: 1]。"
+                ]}
+            ]
+        }
+    };
+
+    let currentLang = 'en';
+    let selectedCategoryTemplates = [];
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        document.getElementById('ui-subtitle').innerText = reviewDatabase[lang].subtitle;
+        
+        const container = document.getElementById('treatment-tags');
+        container.innerHTML = "";
+        
+        reviewDatabase[lang].treatments.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'tag';
+            div.innerText = item.name;
+            div.onclick = function() { selectCategory(item.templates, this); };
+            container.appendChild(div);
+            
+            if(index === 0) {
+                div.click();
+            }
+        });
+    }
+
+    function selectCategory(templates, element) {
+        document.querySelectorAll('.tag').forEach(t => t.classList.remove('selected'));
+        element.classList.add('selected');
+        selectedCategoryTemplates = templates;
+        autoSelectBestReview();
+    }
+
+    function autoSelectBestReview() {
+        if(selectedCategoryTemplates.length === 0) return;
+        const randomIndex = Math.floor(Math.random() * selectedCategoryTemplates.length);
+        document.getElementById("reviewBox").value = selectedCategoryTemplates[randomIndex];
+    }
+
+    function copyAndRedirect() {
+        const text = document.getElementById("reviewBox").value;
+        if(!text) {
+            alert("Please select a treatment category first!");
+            return;
+        }
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Review copied to clipboard! Opening Google review box. Just long-press and paste!");
+            window.location.href = "https://search.google.com/local/writereview?placeid=ChIJfeABDW1B5DkRAxvyb9j6Cyk";
+        });
+    }
+
+    window.onload = function() {
+        setLanguage('en');
+    };
+</script>
+
+</body>
+</html>
