@@ -1,4 +1,3 @@
-# Search/AI crawler preferences for this private utility page
 User-agent: GPTBot
 Disallow: /
 
