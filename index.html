@@ -44,7 +44,381 @@
 .review-title{margin-top:17px}
 .review-title + textarea{margin-top:0}
 @media(max-width:600px){.action-row{flex-direction:column}.action-row .btn-generate{width:100%}.category-dropdown{max-height:220px}}
+
+.lang-hint{text-align:center;font-size:11px;color:#777;margin:-8px 0 12px;line-height:1.35}
+.lang-selector{flex-wrap:wrap}
+.lang-btn{transition:background .15s,color .15s,transform .15s;border:1px solid transparent;min-height:36px}
+.lang-btn:active{transform:scale(.98)}
+@media(max-width:600px){
+  .lang-selector{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+  .lang-btn{width:100%;padding:8px 6px;font-size:12px;border-radius:12px;min-height:40px}
+  .lang-hint{font-size:10px;margin:-2px 0 10px}
+}
+
+.step2-cta{display:flex;align-items:center;gap:10px;margin-top:15px;padding:11px;border-radius:11px;background:#08a34a;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.step-badge{flex:0 0 58px;min-height:66px;border-radius:12px;background:#ef2353;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}.step-badge span{font-size:11px;font-weight:800}.step-badge strong{font-size:25px;margin-top:3px}.step2-main{flex:1;min-width:0;text-align:center}.step2-title{color:#fff;font-weight:800;font-size:15px;line-height:1.25;margin-bottom:8px}.step2-main .btn-submit{width:78%;margin:0 auto;display:block;background:#ffe600;color:#111;border:2px dashed #f20b0b;border-radius:9px;min-height:48px;padding:8px 12px;font-size:18px;font-weight:900;box-shadow:none}.step2-main .btn-submit:active{transform:scale(.98)}.privacy-note{text-align:center;color:#777;font-size:11px;line-height:1.35;margin:7px 0 0}
+@media(max-width:600px){.step2-cta{position:sticky;bottom:6px;z-index:30;padding:9px;gap:8px}.step-badge{flex-basis:52px;min-height:58px}.step2-title{font-size:13px;margin-bottom:6px}.step2-main .btn-submit{width:92%;min-height:46px;font-size:17px}.privacy-note{font-size:10px;padding-bottom:2px}}
+
+/* =========================================================
+   PREMIUM MOBILE-FIRST UX REWORK
+   Same workflow, cleaner visual hierarchy and stronger tap targets.
+   ========================================================= */
+:root{
+  --brand:#1769e0;
+  --brand-dark:#0e4fb8;
+  --ink:#101828;
+  --muted:#667085;
+  --line:#d8dee8;
+  --soft:#f6f9ff;
+  --green:#08a64a;
+  --green-dark:#078b3f;
+  --yellow:#ffe21a;
+  --red:#ef2353;
+}
+body{
+  padding:18px 12px 28px;
+  background:linear-gradient(180deg,#f5f8ff 0%,#eef4fb 100%);
+  color:var(--ink);
+}
+.card{
+  max-width:620px;
+  padding:0 26px 22px;
+  border:1px solid rgba(15,23,42,.07);
+  border-radius:28px;
+  box-shadow:0 16px 45px rgba(16,24,40,.10);
+  overflow:hidden;
+}
+.review-hero{
+  margin:0 -26px 12px;
+  padding:28px 20px 16px;
+  background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%);
+  border-bottom:1px solid #e7ecf4;
+}
+.review-hero h1{
+  font-size:clamp(28px,5vw,38px);
+  font-weight:800;
+  letter-spacing:-.7px;
+  margin-bottom:7px;
+}
+.review-hero-sub{font-size:16px;color:#526071;max-width:520px}
+.stars{gap:8px;margin:10px 0 4px}
+.star{font-size:43px;padding:0 2px;color:#ffb800;filter:drop-shadow(0 2px 1px rgba(255,184,0,.16))}
+.star.inactive{color:#d9dee7;filter:none}
+.lang-selector{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin:0 0 7px;
+}
+.lang-btn{
+  min-height:44px;
+  padding:9px 6px;
+  border:1px solid #cfd7e4;
+  border-radius:14px;
+  background:#fff;
+  color:#182230;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:0 2px 6px rgba(16,24,40,.04);
+}
+.lang-btn.active{
+  background:linear-gradient(135deg,#1769e0,#0f5bc7);
+  border-color:#1769e0;
+  color:#fff;
+  box-shadow:0 5px 14px rgba(23,105,224,.22);
+}
+.lang-hint{font-size:12px;color:#7a8595;margin:0 0 12px}
+.how-it-works{
+  margin:0 0 16px;
+  border:1px solid #dce4ef;
+  border-radius:16px;
+  background:#fff;
+  overflow:hidden;
+}
+.how-it-works summary{
+  padding:13px 15px;
+  color:#172033;
+  font-size:15px;
+}
+.steps{padding:4px 15px 14px;gap:8px;font-size:13px}
+.steps b{color:var(--brand)}
+.rating-prompt{
+  padding:11px 13px;
+  border-radius:13px;
+  background:#f4f8ff;
+  color:#344054;
+  font-size:13px;
+  margin:0 0 10px;
+}
+.notice{
+  margin:0 0 18px;
+  padding:13px 15px;
+  border:1px solid #dce8f8;
+  border-radius:14px;
+  background:#edf5ff;
+  color:#27364a;
+  font-size:13px;
+  line-height:1.55;
+}
+.section-title{
+  color:#111827;
+  font-size:14px;
+  letter-spacing:.65px;
+  margin:17px 0 8px;
+}
+.search-wrap{
+  height:58px;
+  border:1.5px solid #ccd5e2;
+  border-radius:16px;
+  box-shadow:0 2px 8px rgba(16,24,40,.04);
+}
+.search-icon{font-size:28px;margin-left:16px;color:#344054}
+.search-wrap input{font-size:16px;padding:0 10px}
+.dropdown-toggle{font-size:22px;padding:0 15px;border-left:1px solid #e1e6ee}
+.category-dropdown{border-radius:0 0 15px 15px;box-shadow:0 12px 25px rgba(16,24,40,.10)}
+.category-option{padding:13px 15px;font-size:14px}
+.selected-category{
+  margin-top:9px;
+  padding:8px 11px;
+  border-radius:10px;
+  background:#f8fafc;
+  border:1px solid #e7ebf0;
+}
+#selectedCategoryName{color:var(--brand-dark)}
+.category-helper{font-size:11px;color:#8a94a3;margin:6px 2px 0}
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+.action-row .btn-generate{
+  position:relative;
+  min-height:106px;
+  margin:0;
+  padding:17px 14px 14px 54px;
+  text-align:left;
+  border-radius:17px;
+  font-size:14px;
+  border:1.5px solid #d7dee8;
+  background:#fff;
+  color:#172033;
+  box-shadow:0 3px 10px rgba(16,24,40,.04);
+}
+.action-row .action-primary{
+  border-color:#19a957;
+  background:linear-gradient(180deg,#f7fff9,#fff);
+  box-shadow:0 5px 15px rgba(8,166,74,.08);
+}
+.action-step{
+  position:absolute;left:11px;top:11px;
+  background:var(--red);color:#fff;border-radius:9px;
+  padding:6px 7px;font-size:9px;font-weight:900;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+}
+.action-icon{position:absolute;left:14px;top:49px;font-size:27px;color:#344054}
+
+.action-primary .action-icon{color:var(--green)}
+.recommended-badge{
+  position:absolute;left:10px;top:-10px;z-index:2;
+  background:#19a957;color:#fff;border-radius:7px;
+  padding:5px 8px;font-size:10px;font-weight:900;letter-spacing:.3px;
+}
+.click-here-blink{
+  display:inline-block;align-self:flex-start;
+  margin-top:2px;padding:7px 18px;border:3px dashed #f04a2f;
+  border-radius:8px;background:#ffe91a;color:#111;
+  font-size:14px;font-weight:900;line-height:1;
+  box-shadow:0 0 0 2px rgba(255,233,26,.25);
+  animation:clickHereBlink .85s steps(2,start) infinite;
+}
+@keyframes clickHereBlink{
+  0%,49%{opacity:1;transform:scale(1)}
+  50%,100%{opacity:.45;transform:scale(1.03)}
+}
+
+.action-copy{display:flex;flex-direction:column;gap:5px}
+.action-copy strong{font-size:15px;line-height:1.25}
+.action-copy small{font-size:11px;line-height:1.35;color:#667085;font-weight:500}
+.review-title{margin-top:20px}
+.review-helper{font-size:11px;color:#7b8796;margin:-3px 0 8px;line-height:1.4}
+textarea{
+  height:190px;
+  margin-top:0;
+  padding:15px;
+  border:1.5px solid #ccd5e2;
+  border-radius:15px;
+  background:#fff;
+  color:#182230;
+  font-size:15px;
+  line-height:1.6;
+  box-shadow:inset 0 1px 2px rgba(16,24,40,.025);
+}
+.counter{font-size:11px;margin-top:9px;color:#687385}
+#repeat-note{font-size:11px;color:#8a94a3}
+.step2-cta{
+  margin-top:16px;
+  padding:12px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#08a64a,#07913f);
+  box-shadow:0 9px 22px rgba(8,166,74,.20);
+}
+.step-badge{flex-basis:62px;min-height:70px;border-radius:14px;background:var(--red)}
+.step-badge span{font-size:11px}.step-badge strong{font-size:27px}
+.step2-title{font-size:16px;margin-bottom:8px}
+.step2-main .btn-submit{
+  width:84%;min-height:50px;border-radius:12px;
+  background:var(--yellow);border:3px dashed #ef1616;
+  font-size:18px;box-shadow:0 2px 0 rgba(0,0,0,.08)
+}
+.privacy-note{font-size:11px;color:#7b8796;margin-top:8px}
+@media(max-width:600px){
+  body{padding:8px 7px 18px}
+  .card{padding:0 15px 18px;border-radius:23px}
+  .review-hero{margin:0 -15px 10px;padding:23px 13px 13px}
+  .review-hero h1{font-size:29px;letter-spacing:-.5px}
+  .review-hero-sub{font-size:14px}
+  .stars{gap:5px}.star{font-size:38px}
+  .lang-selector{grid-template-columns:repeat(6,1fr);gap:6px}
+  .lang-btn{min-height:41px;font-size:11px;padding:7px 3px}
+  .lang-btn:nth-child(4){grid-column:2 / span 2}
+  .lang-btn:nth-child(5){grid-column:4 / span 2}
+  .how-it-works summary{font-size:14px}
+  .action-row{grid-template-columns:1fr;gap:9px}
+  .action-row .btn-generate{min-height:91px;padding-left:58px}
+  .step2-cta{position:sticky;bottom:7px;z-index:30}
+  .step2-title{font-size:14px}
+  .step2-main .btn-submit{width:94%;font-size:17px}
+}
+@media(min-width:601px){
+  .step2-cta{position:relative}
+}
+
+
+@media (prefers-reduced-motion:reduce){
+  .step2-final .step2-click{animation:none}
+}
+@media(max-width:380px){
+  .step2-final-inner{align-items:flex-start}
+  .step2-final .step2-badge{min-width:62px;min-height:52px;font-size:14px}
+  .step2-final .step2-click{font-size:22px}
+}
+
+
+/* Premium subtle pulse: original Step 2 layout is unchanged */
+.step2-click-premium{
+  position:relative;
+  animation:premiumClickPulse 1.15s ease-in-out infinite;
+  transform-origin:center;
+}
+@keyframes premiumClickPulse{
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,220,0,0)}
+  50%{opacity:.94;box-shadow:0 0 0 5px rgba(255,220,0,.30),0 0 16px rgba(255,210,0,.42)}
+}
+@media (prefers-reduced-motion:reduce){
+  .step2-click-premium{animation:none}
+}
+
+
+/* Google Account guidance */
+.google-account-help{
+  margin:10px 0 0;
+  border:1px solid #dfe3e7;
+  border-radius:10px;
+  background:#fafbfc;
+  overflow:hidden;
+}
+.google-help-toggle{
+  width:100%;
+  min-height:44px;
+  border:0;
+  background:#fafbfc;
+  color:#3c4043;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  font-size:12px;
+  font-weight:700;
+  text-align:left;
+  cursor:pointer;
+}
+.google-help-toggle .google-help-chevron{
+  margin-left:auto;
+  font-size:18px;
+  line-height:1;
+  transition:transform .2s ease;
+}
+.google-help-toggle[aria-expanded="true"] .google-help-chevron{
+  transform:rotate(180deg);
+}
+.google-help-panel{
+  padding:0 12px 12px;
+}
+.google-help-copy{
+  padding:9px 10px;
+  border-radius:8px;
+  background:#fff;
+  border:1px solid #e8eaed;
+  color:#3c4043;
+  font-size:12px;
+  line-height:1.45;
+}
+.google-help-copy strong{
+  display:block;
+  margin-bottom:3px;
+  font-size:12px;
+}
+.google-help-copy p{
+  margin:0;
+}
+.google-help-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:9px;
+}
+.google-signin-btn,
+.google-continue-btn{
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:800;
+  text-decoration:none;
+  cursor:pointer;
+}
+.google-signin-btn{
+  border:1px solid #dadce0;
+  background:#fff;
+  color:#1a73e8;
+}
+.google-continue-btn{
+  border:0;
+  background:#1a73e8;
+  color:#fff;
+}
+@media(max-width:380px){
+  .google-help-actions{grid-template-columns:1fr}
+}
+
+/* Google-style Step 1 → Step 2 guidance */
+.step-flow-hint{margin:10px 0;padding:10px 12px;border:1px solid #dadce0;border-radius:8px;background:#f8f9fa;color:#3c4043;font-size:12px;line-height:1.45}
+.step-flow-hint[hidden]{display:none}
+.step-flow-text strong{font-weight:600}
+.step-flow-arrow{margin-top:7px;padding-top:7px;border-top:1px solid #e5e7e9;color:#5f6368;font-size:11px;font-weight:700;text-align:center}
 </style>
+<script>
+(function(){
+  try{
+    var key="review_generator_language_v2";
+    var langs=["en","bn","hi","be","he"];
+    var saved=localStorage.getItem(key);
+    if(langs.indexOf(saved)===-1){
+      saved=langs[Math.floor(Math.random()*langs.length)];
+      localStorage.setItem(key,saved);
+    }
+    document.documentElement.dataset.startLanguage=saved;
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <div class="card">
@@ -60,11 +434,14 @@
   </div>
 </div>
 
-<div class="lang-selector">
-  <button class="lang-btn active" data-lang="en">English</button>
-  <button class="lang-btn" data-lang="hi">हिंदी</button>
+<div class="lang-selector" role="group" aria-label="Review language">
+  <button class="lang-btn" data-lang="en">English</button>
   <button class="lang-btn" data-lang="bn">বাংলা</button>
+  <button class="lang-btn" data-lang="hi">हिंदी</button>
+  <button class="lang-btn" data-lang="be">Banglish</button>
+  <button class="lang-btn" data-lang="he">Hinglish</button>
 </div>
+<div class="lang-hint" id="lang-hint">Choose the language or natural mix that feels most like you.</div>
 
 <details class="how-it-works">
   <summary>⌄ How it works</summary>
@@ -82,30 +459,86 @@
 <div class="section-title">What did you visit for?</div>
 <div class="search-wrap">
   <span class="search-icon">⌕</span>
-  <input id="categorySearch" type="search" autocomplete="off" placeholder="Search or select..." aria-label="Search treatment category">
+  <input id="categorySearch" type="search" autocomplete="off" placeholder="Search or select..." aria-label="Search treatment category" aria-expanded="false" aria-controls="categoryDropdown" role="combobox">
   <button type="button" class="clear-search" id="clearSearch" aria-label="Clear search">×</button>
-  <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="Show treatment categories">⌄</button>
+  <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="Show treatment categories" aria-expanded="false" aria-controls="categoryDropdown">⌄</button>
 </div>
 <div class="category-dropdown" id="categoryDropdown" role="listbox" aria-label="Treatment categories"></div>
 
 <div class="selected-category" id="selectedCategory">
   <span class="selected-label">Selected:</span>
-  <span id="selectedCategoryName">Dental Check-up</span>
+  <span id="selectedCategoryName">None selected</span>
 </div>
+<div class="category-helper">Choose the option that best matches your actual visit.</div>
 
 <div class="action-row">
-  <button class="btn-generate" id="differentBtn">↻ Different Review — Same Category</button>
-  <button class="btn-generate" id="anotherBtn">⤨ Random Category + Review</button>
+  <button type="button" class="btn-generate action-primary" id="anotherBtn"><span class="recommended-badge">RECOMMENDED</span><span class="action-step">STEP 1</span><span class="action-icon">✦</span><span class="action-copy"><strong>Random Category + Review</strong><small>Get a fresh category and review</small><span class="click-here-blink">CLICK HERE</span></span></button>
+  <button type="button" class="btn-generate action-secondary" id="differentBtn"><span class="action-icon">↻</span><span class="action-copy"><strong>Different Review — Same Category</strong><small>Get another review without changing your category</small></span></button>
 </div>
 
 <span id="review-focus" style="display:none"></span>
 
 <div class="section-title review-title">Your Review</div>
+<div class="review-helper">Review generated from your selected category. Edit any detail that does not match your real experience.</div>
 <textarea id="reviewBox" aria-label="Review draft" placeholder="Generated review..."></textarea>
 <div class="counter" id="counter"></div>
 <div class="counter" id="repeat-note">Recent generated reviews are remembered on this device to reduce repeats.</div>
 
-<button class="btn-submit" id="copyBtn">📋 Copy Review &amp; Continue to Google →</button>
+
+<section id="googleAccountHelp" class="google-account-help" aria-label="Google Account guidance">
+  <button id="googleHelpToggle" class="google-help-toggle" type="button" aria-expanded="false">
+    <span>ⓘ</span>
+    <span id="googleHelpTitle">Google Account required?</span>
+    <span class="google-help-chevron">⌄</span>
+  </button>
+
+  <div id="googleHelpPanel" class="google-help-panel" hidden>
+    <div class="google-help-copy" data-help-lang="en">
+      <strong>Google Account required</strong>
+      <p>Please sign in to your Google Account to post your review. Gmail is not required.</p>
+    </div>
+    <div class="google-help-copy" data-help-lang="bn" hidden>
+      <strong>Google Account প্রয়োজন</strong>
+      <p>আপনার রিভিউ পোস্ট করতে Google Account-এ sign in করুন। Gmail থাকা বাধ্যতামূলক নয়।</p>
+    </div>
+    <div class="google-help-copy" data-help-lang="hi" hidden>
+      <strong>Google Account आवश्यक है</strong>
+      <p>अपना review पोस्ट करने के लिए Google Account में sign in करें। Gmail होना जरूरी नहीं है।</p>
+    </div>
+
+    <div class="google-help-actions">
+      <a id="googleSignIn" class="google-signin-btn"
+         href="https://accounts.google.com/ServiceLogin"
+         target="_blank" rel="noopener noreferrer">Sign in to Google</a>
+      <button id="googleContinue" class="google-continue-btn" type="button">
+        I'm signed in — Continue
+      </button>
+    </div>
+  </div>
+</section>
+
+<div id="stepFlowHint" class="step-flow-hint" hidden aria-live="polite">
+  <div class="step-flow-text" data-flow-lang="en">
+    <strong>ⓘ Please click Step 1 to generate your review, then click “Click Here” in Step 2.</strong>
+    <div class="step-flow-arrow">STEP 1 → Generate Review → STEP 2 → Click Here</div>
+  </div>
+  <div class="step-flow-text" data-flow-lang="bn" hidden>
+    <strong>ⓘ আপনার রিভিউ তৈরি করতে প্রথমে Step 1-এ ক্লিক করুন, তারপর Step 2-এর “Click Here”-এ ক্লিক করুন।</strong>
+    <div class="step-flow-arrow">Step 1 → রিভিউ তৈরি করুন → Step 2 → Click Here</div>
+  </div>
+  <div class="step-flow-text" data-flow-lang="hi" hidden>
+    <strong>ⓘ अपना review बनाने के लिए पहले Step 1 पर क्लिक करें, फिर Step 2 में “Click Here” पर क्लिक करें।</strong>
+    <div class="step-flow-arrow">Step 1 → Review बनाएं → Step 2 → Click Here</div>
+  </div>
+</div>
+<div class="step2-cta">
+  <div class="step-badge"><span>STEP</span><strong>2</strong></div>
+  <div class="step2-main">
+    <div class="step2-title">📋 Copy Review &amp; Continue to Google</div>
+    <button class="btn-submit step2-click-premium" id="copyBtn" type="button">Click Here</button>
+  </div>
+</div>
+<div class="privacy-note">⌾ We respect your privacy. No review text is sent to our server.</div>
 </div>
 <script>
 
@@ -147,6 +580,79 @@ try{
     }
   });
 }catch(e){}
+/* =========================================================
+   HUMANIZED CODE-MIX MODES
+   Banglish = Bengali + English
+   Hinglish = Hindi + English
+   These are generated from the existing knowledge bank so the
+   original category-specific facts are preserved.
+   ========================================================= */
+const mixedMeta={
+  be:{
+    title:"একটা ছোট্ট রিভিউ দিন!",
+    sub:"আপনার মতো করে বাংলা + English-এ লিখুন — ৩০ সেকেন্ডেরও কম সময় লাগবে।",
+    experience:"৫ স্টার আগে থেকেই বেছে নেওয়া আছে — আপনার বাস্তব অভিজ্ঞতা অনুযায়ী বদলান:",
+    subtitle:"কোন বিষয়ে এসেছিলেন?",
+    notice:"Review draft আপনার category অনুযায়ী বাংলা + English mix-এ তৈরি হয়। নিজের বাস্তব অভিজ্ঞতা অনুযায়ী edit করুন।",
+    hint:"Banglish — বাংলা কথার সঙ্গে natural English words",
+    search:"Search or select treatment..."
+  },
+  he:{
+    title:"अपना छोटा सा रिव्यू शेयर करें!",
+    sub:"जैसे आप naturally बोलते हैं — Hindi + English में लिखें। 30 सेकंड से भी कम समय लगेगा।",
+    experience:"5 स्टार पहले से चुने हैं — अपने वास्तविक अनुभव के अनुसार बदलें:",
+    subtitle:"आप किस इलाज के लिए आए थे?",
+    notice:"Review draft आपकी category के हिसाब से natural Hindi + English mix में बनता है। अपने real experience के अनुसार edit करें।",
+    hint:"Hinglish — Hindi के साथ natural English words",
+    search:"Search or select treatment..."
+  }
+};
+
+function mixedCategoryList(mode){
+  const regional=mode==="be"?reviewMeta.bn.treatments:reviewMeta.hi.treatments;
+  return regional;
+}
+
+function pickPair(a,b){
+  return [pick(a),pick(b)];
+}
+
+function generateMixedReview(mode,categoryId){
+  const regionalLang=mode==="be"?"bn":"hi";
+  const en=knowledgeBank.en[categoryId];
+  const rg=knowledgeBank[regionalLang][categoryId];
+  if(!en||!rg)return "";
+  const eo=pick(en.o), eb=pick(en.b), er=pick(en.r), ec=pick(en.c);
+  const ro=pick(rg.o), rb=pick(rg.b), rr=pick(rg.r), rc=pick(rg.c);
+  const patterns=mode==="be"?[
+    [ro,eb,rr,ec], [eo,rb,er,rc], [ro,eb,er,rc],
+    [eo,rb,rr,ec], [ro,rb,er,ec], [eo,eb,rr,rc]
+  ]:[
+    [ro,eb,rr,ec], [eo,rb,er,rc], [ro,eb,er,rc],
+    [eo,rb,rr,ec], [ro,rb,er,ec], [eo,eb,rr,rc]
+  ];
+  let parts=pick(patterns).filter(Boolean);
+  // Occasionally use a shorter, more conversational 3-part review.
+  if(Math.random()<0.28) parts=parts.slice(0,3);
+  return parts.join(" ").replace(/\s+/g," ").trim();
+}
+
+function ensureMixedBanks(){
+  ["be","he"].forEach(mode=>{
+    const rg=mode==="be"?"bn":"hi";
+    knowledgeBank[mode]={};
+    reviewMeta[mode]={
+      subtitle:mixedMeta[mode].subtitle,
+      notice:mixedMeta[mode].notice,
+      treatments:mixedCategoryList(mode).map(x=>({id:x.id,name:x.name}))
+    };
+    reviewMeta[mode].treatments.forEach(item=>{
+      knowledgeBank[mode][item.id]={mixed:true};
+    });
+  });
+}
+ensureMixedBanks();
+
 const GOOGLE_REVIEW_URL="https://search.google.com/local/writereview?placeid=ChIJfeABDW1B5DkRAxvyb9j6Cyk";
 let currentLang="en",selectedCategoryId="",recentKeys=[],generatedCount=0;
 const $=id=>document.getElementById(id);
@@ -182,31 +688,47 @@ function updateCategorySelection(){
     t.setAttribute("aria-selected",selected?"true":"false");
   });
   const item=getCategoryList().find(x=>x.id===selectedCategoryId);
-  $("selectedCategoryName").textContent=item?item.name:"";
+  $("selectedCategoryName").textContent=item?item.name:"None selected";
 }
 function openCategoryDropdown(){
   $("categoryDropdown").classList.add("open");
+  $("categorySearch").setAttribute("aria-expanded","true");
+  $("dropdownToggle").setAttribute("aria-expanded","true");
   renderCategories($("categorySearch").value);
 }
 function closeCategoryDropdown(){
   $("categoryDropdown").classList.remove("open");
+  $("categorySearch").setAttribute("aria-expanded","false");
+  $("dropdownToggle").setAttribute("aria-expanded","false");
 }
 function setLanguage(lang){
   currentLang=lang;
+  document.documentElement.lang=lang==="bn"?"bn":(lang==="hi"||lang==="he"?"hi":(lang==="be"?"bn":"en"));
   document.querySelectorAll(".lang-btn").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));
-  $("ui-hero-title").textContent=heroText[lang].title;
-  $("ui-hero-sub").textContent="It takes less than 30 seconds...";
-  $("rating-prompt").textContent=heroText[lang].experience;
-  $("ui-notice").textContent=reviewMeta[lang].notice;
-  $("categorySearch").placeholder=lang==="bn"?"Search or select...":(lang==="hi"?"Search or select...":"Search or select...");
-  if(!reviewMeta[lang].treatments.some(item=>item.id===selectedCategoryId)){
-    selectedCategoryId=reviewMeta[lang].treatments[0].id;
+
+  const isMixed=!!mixedMeta[lang];
+  const hero=isMixed?mixedMeta[lang]:heroText[lang];
+  const meta=reviewMeta[lang];
+  $("ui-hero-title").textContent=hero.title;
+  $("ui-hero-sub").textContent=hero.sub || "It takes less than 30 seconds...";
+  $("rating-prompt").textContent=hero.experience;
+  $("ui-notice").textContent=meta.notice;
+  $("categorySearch").placeholder=isMixed?mixedMeta[lang].search:(lang==="bn"?"Search or select...":lang==="hi"?"Search or select...":"Search or select...");
+  $("lang-hint").textContent=isMixed?mixedMeta[lang].hint:"Choose the language or natural mix that feels most like you.";
+
+  // Never auto-select a treatment or auto-generate a review on page load/language change.
+  // The visitor must choose a category or explicitly use Random Category + Review.
+  if(selectedCategoryId && !meta.treatments.some(item=>item.id===selectedCategoryId)){
+    selectedCategoryId="";
   }
-  $("categorySearch").value="";
+  $("categorySearch").value=selectedCategoryId ? ((meta.treatments.find(item=>item.id===selectedCategoryId)||{}).name||"") : "";
   renderCategories();
+  updateCategorySelection();
   updateCounter();
-  generateReview();
+  $("reviewBox").value="";
+  generatedCount=0;
 }
+
 function selectCategory(id){
   selectedCategoryId=id;
   const item=getCategoryList().find(x=>x.id===id);
@@ -224,43 +746,64 @@ function shuffle(arr){
  return a;
 }
 function generateReview(){
- const bank=knowledgeBank[currentLang][selectedCategoryId];
- if(!bank)return;
- let review="",key="",tries=0;
- do{
-   // Randomize component order choices and choose a fresh combination.
-   const parts=[pick(bank.o),pick(bank.b),pick(bank.r),pick(bank.c)];
-   review=parts.join(" ");
-   key=currentLang+"|"+selectedCategoryId+"|"+review;
-   tries++;
- }while(recentKeys.includes(key)&&tries<500);
+  if((currentLang==="be"||currentLang==="he") && selectedCategoryId){
+    let review="",key="",tries=0;
+    do{
+      review=generateMixedReview(currentLang,selectedCategoryId);
+      key=currentLang+"|"+selectedCategoryId+"|"+review;
+      tries++;
+    }while((recentKeys.includes(key)||hasGeneratedReview(review))&&tries<500);
+    recentKeys.push(key);
+    if(recentKeys.length>500)recentKeys.shift();
+    $("reviewBox").value=review;
+    rememberGeneratedReview(review);
+    generatedCount++;
+    updateCounter();
+    return;
+  }
 
- recentKeys.push(key);
- if(recentKeys.length>500)recentKeys.shift();
- $("reviewBox").value=review;
- generatedCount++;
- updateCounter();
+  const bank=knowledgeBank[currentLang][selectedCategoryId];
+  if(!bank)return;
+  let review="",key="",tries=0;
+  do{
+    const parts=[pick(bank.o),pick(bank.b),pick(bank.r),pick(bank.c)];
+    review=parts.join(" ");
+    key=currentLang+"|"+selectedCategoryId+"|"+review;
+    tries++;
+  }while((recentKeys.includes(key)||hasGeneratedReview(review)) && tries<500);
+
+  recentKeys.push(key);
+  if(recentKeys.length>500)recentKeys.shift();
+  $("reviewBox").value=review;
+  rememberGeneratedReview(review);
+  generatedCount++;
+  updateCounter();
 }
+
 function generateDifferentSameCategory(){
- // Category remains locked; only the review combination changes.
+ // Never invent a category. The visitor must select one first.
  if(!selectedCategoryId){
-   const first=reviewMeta[currentLang].treatments[0];
-   selectedCategoryId=first.id;
-   document.querySelectorAll(".tag").forEach(t=>t.classList.toggle("selected",t.dataset.id===first.id));
+   $("reviewBox").value="";
+   $("status") && ($("status").textContent="Please choose a treatment/category first.");
+   return;
  }
  generateReview();
 }
 function autoSelectRandomReview(){
  const list=getCategoryList();
+ if(!list.length)return;
  let item=pick(list),tries=0;
  while(list.length>1&&item.id===selectedCategoryId&&tries<30){item=pick(list);tries++}
+ // Random selection happens only after the visitor explicitly clicks STEP 1.
  selectCategory(item.id);
 }
 function updateCounter(){
- const combinationsPerCategory=1296;
- const total=reviewMeta[currentLang].treatments.length*combinationsPerCategory;
- $("counter").textContent=total+" possible combinations in this language • "+reviewMeta[currentLang].treatments.length+" categories";
+  const combinationsPerCategory=1296;
+  const count=reviewMeta[currentLang].treatments.length*combinationsPerCategory;
+  const label=currentLang==="be"?"possible Banglish combinations":currentLang==="he"?"possible Hinglish combinations":"possible combinations in this language";
+  $("counter").textContent=count.toLocaleString()+" "+label+" • "+reviewMeta[currentLang].treatments.length+" categories";
 }
+
 let selectedRating=5;
 
 function setRating(rating){
@@ -271,7 +814,7 @@ function setRating(rating){
     star.classList.toggle("inactive",value>rating);
     star.setAttribute("aria-checked",value===rating?"true":"false");
   });
-  $("rating-prompt").textContent=heroText[currentLang].experience;
+  $("rating-prompt").textContent=(mixedMeta[currentLang]?.experience || heroText[currentLang].experience);
 }
 
 document.querySelectorAll(".star").forEach(star=>{
@@ -280,7 +823,7 @@ document.querySelectorAll(".star").forEach(star=>{
 
 async function copyReview(){
   const text=$("reviewBox").value.trim();
-  if(!text){ alert("Please generate a review first."); return; }
+  if(!text){ alert("Please complete Step 1 first, then continue with Step 2."); return; }
 
   try{
     await navigator.clipboard.writeText(text);
@@ -291,13 +834,21 @@ async function copyReview(){
     document.execCommand("copy");
   }
 
-  const url=GOOGLE_REVIEW_URL;
-  const opened=window.open(url,"_blank","noopener,noreferrer");
+  const button=$("copyBtn");
+  const old=button.textContent;
+  button.textContent="✓ Copied — Opening Google...";
+  setTimeout(()=>{button.textContent=old},1800);
 
+  if(!GOOGLE_REVIEW_URL){
+    alert("Review copied. The Google review link is not configured.");
+    return;
+  }
+  const opened=window.open(GOOGLE_REVIEW_URL,"_blank","noopener,noreferrer");
   if(!opened){
-    alert("Review copied. Please allow pop-ups to open the Google review page.");
+    window.location.href=GOOGLE_REVIEW_URL;
   }
 }
+
 document.querySelectorAll(".lang-btn").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang)));
 $("differentBtn").addEventListener("click",generateDifferentSameCategory);
 $("anotherBtn").addEventListener("click",autoSelectRandomReview);
@@ -323,7 +874,189 @@ document.addEventListener("click",e=>{
   if(!e.target.closest(".search-wrap") && !e.target.closest(".category-dropdown")) closeCategoryDropdown();
 });
 
-window.addEventListener("DOMContentLoaded",()=>setLanguage("en"));
+window.addEventListener("DOMContentLoaded",()=>{
+  const LANGUAGES = ["en","bn","hi","be","he"];
+  const ORDER_KEY = "review_generator_language_order_v2";
+  const INDEX_KEY = "review_generator_language_index_v2";
 
+  function shuffledLanguages(){
+    const a = [...LANGUAGES];
+    for(let i=a.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
+  }
+
+  let order = null;
+  let index = 0;
+
+  try{
+    order = JSON.parse(localStorage.getItem(ORDER_KEY) || "null");
+    index = Number(localStorage.getItem(INDEX_KEY) || "0");
+  }catch(e){
+    order = null;
+    index = 0;
+  }
+
+  // Create a new random permutation when all five languages have been used.
+  if(!Array.isArray(order) ||
+     order.length !== LANGUAGES.length ||
+     !LANGUAGES.every(lang => order.includes(lang)) ||
+     !Number.isInteger(index) ||
+     index < 0 ||
+     index >= LANGUAGES.length){
+    order = shuffledLanguages();
+    index = 0;
+  }
+
+  const language = order[index];
+
+  // Advance to the next language for the next refresh.
+  const nextIndex = index + 1;
+
+  try{
+    localStorage.setItem(ORDER_KEY, JSON.stringify(order));
+    localStorage.setItem(INDEX_KEY, String(nextIndex));
+    // Remove the older random-language key used by previous versions.
+    localStorage.removeItem("review_generator_last_language");
+    localStorage.removeItem("review_generator_language");
+  }catch(e){}
+
+  setLanguage(language);
+});
 </script>
+</div>
+<script>
+(function(){
+  function currentMainLanguage(){
+    var active=document.querySelector(".lang.active, .language-btn.active, [data-lang].active");
+    if(!active) return "en";
+    var value=(active.getAttribute("data-lang")||"en").toLowerCase();
+    if(value.indexOf("bn")===0 || value.indexOf("bang")===0) return "bn";
+    if(value.indexOf("hi")===0 || value.indexOf("hing")===0) return "hi";
+    return "en";
+  }
+
+  function setHelpLanguage(){
+    var lang=currentMainLanguage();
+    document.querySelectorAll(".google-help-copy").forEach(function(el){
+      el.hidden=el.getAttribute("data-help-lang")!==lang;
+    });
+  }
+
+  function getGoogleReviewUrl(){
+    if(typeof GOOGLE_REVIEW_URL!=="undefined" && GOOGLE_REVIEW_URL) return GOOGLE_REVIEW_URL;
+    if(typeof GOOGLE_REVIEW_LINK!=="undefined" && GOOGLE_REVIEW_LINK) return GOOGLE_REVIEW_LINK;
+    if(typeof reviewUrl!=="undefined" && reviewUrl) return reviewUrl;
+
+    var existing=document.querySelector(
+      "a[href*='g.page/r/'][href*='/review'],a[href*='google.com/maps'],a[href*='google.com/search']"
+    );
+    return existing ? existing.href : "";
+  }
+
+  function copyCurrentReview(){
+    var review=document.querySelector("#review, textarea[name='review'], textarea");
+    var text=review ? (review.value||"").trim() : "";
+    if(!text) return Promise.reject(new Error("empty"));
+
+    if(navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(text);
+    }
+
+    if(review){
+      review.focus();
+      review.select();
+      try{ document.execCommand("copy"); }catch(e){}
+    }
+    return Promise.resolve();
+  }
+
+  document.addEventListener("DOMContentLoaded",function(){
+    var toggle=document.getElementById("googleHelpToggle");
+    var panel=document.getElementById("googleHelpPanel");
+    var continueBtn=document.getElementById("googleContinue");
+    var signIn=document.getElementById("googleSignIn");
+
+    setHelpLanguage();
+
+    if(toggle && panel){
+      toggle.addEventListener("click",function(){
+        var open=toggle.getAttribute("aria-expanded")==="true";
+        toggle.setAttribute("aria-expanded",String(!open));
+        panel.hidden=open;
+      });
+    }
+
+    document.addEventListener("click",function(e){
+      var langButton=e.target.closest(".lang, .language-btn, [data-lang]");
+      if(langButton) setTimeout(setHelpLanguage,0);
+    });
+
+    if(continueBtn){
+      continueBtn.addEventListener("click",async function(){
+        try{
+          await copyCurrentReview();
+        }catch(e){
+          var status=document.querySelector("#status,.status");
+          if(status) status.textContent="Please complete Step 1 first, then continue with Step 2.";
+          return;
+        }
+
+        var url=getGoogleReviewUrl();
+        if(url){
+          window.location.href=url;
+        }else{
+          var status=document.querySelector("#status,.status");
+          if(status) status.textContent="Review copied. Open your Google review page to continue.";
+        }
+      });
+    }
+
+    if(signIn){
+      signIn.addEventListener("click",function(){
+        // Google handles authentication. No credentials are collected by this site.
+      });
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  function flowLang(){
+    var a=document.querySelector(".lang.active,.language-btn.active,[data-lang].active");
+    var v=a?(a.getAttribute("data-lang")||"en").toLowerCase():"en";
+    if(v.indexOf("bn")===0||v.indexOf("bang")===0)return "bn";
+    if(v.indexOf("hi")===0||v.indexOf("hing")===0)return "hi";
+    return "en";
+  }
+  function updateFlow(){
+    var lang=flowLang();
+    document.querySelectorAll("#stepFlowHint .step-flow-text").forEach(function(x){
+      x.hidden=x.getAttribute("data-flow-lang")!==lang;
+    });
+  }
+  function showFlow(){
+    var h=document.getElementById("stepFlowHint");
+    if(!h)return;
+    updateFlow();
+    h.hidden=false;
+    try{h.scrollIntoView({behavior:"smooth",block:"nearest"});}catch(e){h.scrollIntoView();}
+  }
+  document.addEventListener("DOMContentLoaded",function(){
+    updateFlow();
+    document.addEventListener("click",function(e){
+      if(e.target.closest(".lang,.language-btn,[data-lang]"))setTimeout(updateFlow,0);
+    });
+    var b=document.getElementById("copyBtn");
+    if(b)b.addEventListener("click",function(){
+      var r=document.querySelector("#review,textarea[name='review'],textarea");
+      if(!r || !(r.value||"").trim())showFlow();
+    },true);
+  });
+})();
+</script>
+
 </body></html>
