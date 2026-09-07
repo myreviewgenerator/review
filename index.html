@@ -405,11 +405,20 @@ textarea{
 .step-flow-text strong{font-weight:600}
 .step-flow-arrow{margin-top:7px;padding-top:7px;border-top:1px solid #e5e7e9;color:#5f6368;font-size:11px;font-weight:700;text-align:center}
 </style>
-<style>
-.style-wrap{margin:8px 0 4px}
-.style-wrap select{width:100%;min-height:42px;border:1px solid #dadce0;border-radius:8px;background:#fff;padding:8px 10px;font-size:13px;color:#202124}
-</style>
-
+<script>
+(function(){
+  try{
+    var key="review_generator_language_v2";
+    var langs=["en","bn","hi","be","he"];
+    var saved=localStorage.getItem(key);
+    if(langs.indexOf(saved)===-1){
+      saved=langs[Math.floor(Math.random()*langs.length)];
+      localStorage.setItem(key,saved);
+    }
+    document.documentElement.dataset.startLanguage=saved;
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <div class="card">
@@ -426,7 +435,7 @@ textarea{
 </div>
 
 <div class="lang-selector" role="group" aria-label="Review language">
-  <button class="lang-btn active" data-lang="en">English</button>
+  <button class="lang-btn" data-lang="en">English</button>
   <button class="lang-btn" data-lang="bn">বাংলা</button>
   <button class="lang-btn" data-lang="hi">हिंदी</button>
   <button class="lang-btn" data-lang="be">Banglish</button>
@@ -450,9 +459,9 @@ textarea{
 <div class="section-title">What did you visit for?</div>
 <div class="search-wrap">
   <span class="search-icon">⌕</span>
-  <input id="categorySearch" type="search" autocomplete="off" placeholder="Search or select..." aria-label="Search treatment category">
+  <input id="categorySearch" type="search" autocomplete="off" placeholder="Search or select..." aria-label="Search treatment category" aria-expanded="false" aria-controls="categoryDropdown" role="combobox">
   <button type="button" class="clear-search" id="clearSearch" aria-label="Clear search">×</button>
-  <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="Show treatment categories">⌄</button>
+  <button type="button" class="dropdown-toggle" id="dropdownToggle" aria-label="Show treatment categories" aria-expanded="false" aria-controls="categoryDropdown">⌄</button>
 </div>
 <div class="category-dropdown" id="categoryDropdown" role="listbox" aria-label="Treatment categories"></div>
 
@@ -463,8 +472,8 @@ textarea{
 <div class="category-helper">Choose the option that best matches your actual visit.</div>
 
 <div class="action-row">
-  <button class="btn-generate action-primary" id="anotherBtn"><span class="recommended-badge">RECOMMENDED</span><span class="action-step">STEP 1</span><span class="action-icon">✦</span><span class="action-copy"><strong>Random Category + Review</strong><small>Get a fresh category and review</small><span class="click-here-blink">CLICK HERE</span></span></button>
-  <button class="btn-generate action-secondary" id="differentBtn"><span class="action-icon">↻</span><span class="action-copy"><strong>Different Review — Same Category</strong><small>Get another review without changing your category</small></span></button>
+  <button type="button" class="btn-generate action-primary" id="anotherBtn"><span class="recommended-badge">RECOMMENDED</span><span class="action-step">STEP 1</span><span class="action-icon">✦</span><span class="action-copy"><strong>Random Category + Review</strong><small>Get a fresh category and review</small><span class="click-here-blink">CLICK HERE</span></span></button>
+  <button type="button" class="btn-generate action-secondary" id="differentBtn"><span class="action-icon">↻</span><span class="action-copy"><strong>Different Review — Same Category</strong><small>Get another review without changing your category</small></span></button>
 </div>
 
 <span id="review-focus" style="display:none"></span>
@@ -531,44 +540,6 @@ textarea{
 </div>
 <div class="privacy-note">⌾ We respect your privacy. No review text is sent to our server.</div>
 </div>
-
-<script>
-/* Style layer: keeps the original review engine intact while adding controlled,
-   human-sounding variation without blind thesaurus replacement. */
-const REVIEW_STYLES = {
-  casual:        {openers:["Overall, I had a good experience.","I’m happy with how the visit went."], closers:["I’d be comfortable coming back.","Overall, it was a positive experience."]},
-  warm:          {openers:["I’m genuinely happy with the care I received.","The whole experience felt reassuring and comfortable."], closers:["I really appreciated the care and attention.","I’d happily recommend them based on my experience."]},
-  professional:  {openers:["I had a positive experience with the care provided.","The visit was handled in a professional manner."], closers:["Overall, I was satisfied with the experience.","The care was clear, professional, and well managed."]},
-  storytelling:  {openers:["From the start of my visit, I felt well looked after.","What stood out to me during the visit was the overall care."], closers:["By the end of the visit, I felt much more confident.","That made the overall experience memorable in a good way."]},
-  short:         {openers:["Good experience overall."], closers:["I’d come back again."]},
-  detailed:      {openers:["I had a good overall experience, and a few things stood out during my visit."], closers:["Taking everything together, I was pleased with the experience and would consider returning."]},
-  reassuring:    {openers:["I felt comfortable and reassured throughout the visit.","The visit gave me a good sense of confidence."], closers:["I left feeling more at ease about my dental care.","Overall, it was a reassuring experience."]},
-  straightforward:{openers:["My experience was positive overall.","The visit went well and met my expectations."], closers:["Overall, I was satisfied.","I would consider returning."]}
-};
-let selectedReviewStyle = localStorage.getItem("reviewGeneratorStyle_v1") || "casual";
-function getReviewStyle(){ return REVIEW_STYLES[selectedReviewStyle] || REVIEW_STYLES.casual; }
-function applyStyleToReview(text){
-  const s=getReviewStyle();
-  if(!text) return text;
-  let out=text.trim();
-  if(!out) return out;
-  // Avoid duplicate-style wrapping on already generated text.
-  const opener = pick(s.openers), closer = pick(s.closers);
-  if(!out.startsWith(opener)) out = opener + " " + out;
-  if(!out.endsWith(closer)) out = out.replace(/[.!?]+$/,"") + ". " + closer;
-  return out;
-}
-document.addEventListener("DOMContentLoaded",()=>{
-  const el=document.getElementById("reviewStyle");
-  if(!el) return;
-  el.value=selectedReviewStyle;
-  el.addEventListener("change",()=>{
-    selectedReviewStyle=el.value;
-    localStorage.setItem("reviewGeneratorStyle_v1",selectedReviewStyle);
-    if(typeof selectedCategoryId!=="undefined" && selectedCategoryId) generateReview();
-  });
-});
-</script>
 <script>
 
 const reviewFocusBank=["treatment-focused", "dentist-focused", "behaviour-focused", "affordability-focused", "care-focused", "experience-focused", "skill/work-focused", "communication-focused", "diagnosis/check-up-focused", "comfort-focused", "pain-management-focused", "explanation-focused", "waiting-time-focused", "staff/team-focused", "cleanliness-focused", "professionalism-focused", "aftercare-focused", "follow-up-focused", "convenience-focused", "trust/confidence-focused", "natural-result-focused", "treatment-planning-focused", "patient-safety-focused", "value-for-money-focused", "personalized-care-focused", "appointment-focused", "first-visit-focused", "second-opinion-focused", "emergency-care-focused", "family/patient-friendly-focused", "accessibility-focused", "overall-value-focused", "recovery-focused", "long-term-care-focused", "result-focused", "clarity-focused", "timeliness-focused", "comfort-and-reassurance-focused", "expectation-setting-focused", "friendliness-focused"];
@@ -721,10 +692,14 @@ function updateCategorySelection(){
 }
 function openCategoryDropdown(){
   $("categoryDropdown").classList.add("open");
+  $("categorySearch").setAttribute("aria-expanded","true");
+  $("dropdownToggle").setAttribute("aria-expanded","true");
   renderCategories($("categorySearch").value);
 }
 function closeCategoryDropdown(){
   $("categoryDropdown").classList.remove("open");
+  $("categorySearch").setAttribute("aria-expanded","false");
+  $("dropdownToggle").setAttribute("aria-expanded","false");
 }
 function setLanguage(lang){
   currentLang=lang;
@@ -780,8 +755,7 @@ function generateReview(){
     }while((recentKeys.includes(key)||hasGeneratedReview(review))&&tries<500);
     recentKeys.push(key);
     if(recentKeys.length>500)recentKeys.shift();
-    $("reviewBox").value=applyStyleToReview(review);
-    review=$("reviewBox").value;
+    $("reviewBox").value=review;
     rememberGeneratedReview(review);
     generatedCount++;
     updateCounter();
@@ -865,6 +839,10 @@ async function copyReview(){
   button.textContent="✓ Copied — Opening Google...";
   setTimeout(()=>{button.textContent=old},1800);
 
+  if(!GOOGLE_REVIEW_URL){
+    alert("Review copied. The Google review link is not configured.");
+    return;
+  }
   const opened=window.open(GOOGLE_REVIEW_URL,"_blank","noopener,noreferrer");
   if(!opened){
     window.location.href=GOOGLE_REVIEW_URL;
@@ -896,58 +874,59 @@ document.addEventListener("click",e=>{
   if(!e.target.closest(".search-wrap") && !e.target.closest(".category-dropdown")) closeCategoryDropdown();
 });
 
-window.addEventListener("DOMContentLoaded",()=>setLanguage("en"));
+window.addEventListener("DOMContentLoaded",()=>{
+  const LANGUAGES = ["en","bn","hi","be","he"];
+  const ORDER_KEY = "review_generator_language_order_v2";
+  const INDEX_KEY = "review_generator_language_index_v2";
 
-
-/* FINAL STEP 2 ACTION */
-(function(){
-  function getReviewText(){
-    var el=document.querySelector("#review, textarea[name='review'], textarea");
-    return el ? (el.value||"").trim() : "";
+  function shuffledLanguages(){
+    const a = [...LANGUAGES];
+    for(let i=a.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
   }
-  function getGoogleUrl(){
-    if(typeof GOOGLE_REVIEW_URL !== "undefined" && GOOGLE_REVIEW_URL) return GOOGLE_REVIEW_URL;
-    if(typeof GOOGLE_REVIEW_LINK !== "undefined" && GOOGLE_REVIEW_LINK) return GOOGLE_REVIEW_LINK;
-    if(typeof reviewUrl !== "undefined" && reviewUrl) return reviewUrl;
-    var a=document.querySelector("a[href*='g.page'],a[href*='google.com/maps'],a[href*='google.com/search']");
-    return a ? a.href : "";
-  }
-  document.addEventListener("DOMContentLoaded",function(){
-    var b=document.getElementById("");
-    if(!b)return;
-    b.addEventListener("click",async function(){
-      var text=getReviewText();
-      if(!text){
-        var status=document.querySelector("#status,.status");
-        if(status) status.textContent="Please complete Step 1 first, then continue with Step 2.";
-        else alert("Please complete Step 1 first, then continue with Step 2.");
-        return;
-      }
-      try{
-        await navigator.clipboard.writeText(text);
-      }catch(e){
-        var el=document.querySelector("#review, textarea[name='review'], textarea");
-        if(el){el.focus();el.select();}
-      }
-      var url=getGoogleUrl();
-      if(url) window.location.href=url;
-      else{
-        var status=document.querySelector("#status,.status");
-        if(status) status.textContent="Review copied. Open the Google review page to paste it.";
-      }
-    });
-  });
-})();
 
+  let order = null;
+  let index = 0;
+
+  try{
+    order = JSON.parse(localStorage.getItem(ORDER_KEY) || "null");
+    index = Number(localStorage.getItem(INDEX_KEY) || "0");
+  }catch(e){
+    order = null;
+    index = 0;
+  }
+
+  // Create a new random permutation when all five languages have been used.
+  if(!Array.isArray(order) ||
+     order.length !== LANGUAGES.length ||
+     !LANGUAGES.every(lang => order.includes(lang)) ||
+     !Number.isInteger(index) ||
+     index < 0 ||
+     index >= LANGUAGES.length){
+    order = shuffledLanguages();
+    index = 0;
+  }
+
+  const language = order[index];
+
+  // Advance to the next language for the next refresh.
+  const nextIndex = index + 1;
+
+  try{
+    localStorage.setItem(ORDER_KEY, JSON.stringify(order));
+    localStorage.setItem(INDEX_KEY, String(nextIndex));
+    // Remove the older random-language key used by previous versions.
+    localStorage.removeItem("review_generator_last_language");
+    localStorage.removeItem("review_generator_language");
+  }catch(e){}
+
+  setLanguage(language);
+});
 </script>
-
-
-  <button id="" class="step2-click" type="button">
-    Click Here
-  </button>
 </div>
-
-
 <script>
 (function(){
   function currentMainLanguage(){
